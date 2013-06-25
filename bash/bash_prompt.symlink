@@ -1,0 +1,23 @@
+if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+    export TERM=gnome-256color
+elif infocmp xterm-256color >/dev/null 2>&1; then
+    export TERM=xterm-256color
+fi
+
+source $DOTFILES/bash/colors-prompt.bash
+source $DOTFILES/bash/prompt-functions.bash
+
+SCM_THEME_PROMPT_DIRTY=" ${red}✗"
+SCM_THEME_PROMPT_CLEAN=" ${yellow}✓"
+SCM_THEME_PROMPT_PREFIX=" ${green}| ${bold_cyan}"
+SCM_THEME_PROMPT_SUFFIX="${green} |"
+
+VIRTUALENV_THEME_PROMPT_PREFIX=" ${green}(${bold_white}"
+VIRTUALENV_THEME_PROMPT_SUFFIX="${green})"
+
+function prompt_command() {
+    PS1="${purple}\u@\h $(virtualenv_prompt) ${reset_color}in ${green}\w${purple} ${bold_cyan}$(scm_prompt_vars) ${yellow}➜${reset_color}  "
+}
+
+PROMPT_COMMAND=prompt_command;
+
