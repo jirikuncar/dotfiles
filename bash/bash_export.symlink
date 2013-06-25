@@ -1,0 +1,37 @@
+# Make vim the default editor
+export EDITOR="vim"
+
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+
+# Include user's bin folder.
+if [ -d "$HOME/bin" ] ; then
+    export PATH=$HOME/bin:$PATH
+fi
+
+#Include development bin folder
+if [ -d "$HOME/Development/bin" ] ; then
+    export PATH=$PATH:$(find $HOME/Development/bin -maxdepth 1 -type d | tr '\n' ':' | sed 's/:$//')
+fi
+
+#Virtual enviromenents home
+export WORKON_HOME=$HOME/Development/envs
+
+#osx color terminal
+export CLICOLOR=1
+
+# Make some commands not show up in history
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+
+# Prefer US English and use UTF-8
+export LANG="en_US"
+export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# Highlight section titles in manual pages
+export LESS_TERMCAP_md="$ORANGE"
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X"
