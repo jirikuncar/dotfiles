@@ -4,7 +4,7 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
     export TERM=xterm-256color
 fi
 
-source $DOTFILES/bash/colors-prompt.bash
+source $DOTFILES/bash/prompt-colors.bash
 source $DOTFILES/bash/prompt-functions.bash
 
 SCM_THEME_PROMPT_DIRTY=" ${red}✗"

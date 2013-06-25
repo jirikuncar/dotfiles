@@ -1,4 +1,4 @@
-for file in $HOME/.{bash_extra,bash_prompt,bash_export,bash_aliases,bash_functions}; do
+for file in $HOME/.{bash_extra,bash_export,bash_prompt,bash_aliases,bash_functions}; do
     [ -r "$file" ] && source "$file"
 done
 
