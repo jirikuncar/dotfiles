@@ -1,0 +1,19 @@
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    grep = auto
+[user]
+    email = egabancho@gmail.com
+    name = Esteban J. G. Gabancho
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore_global
+[grep]
+    match = normal
+    extendRegexp = true
+    lineNumber = true
+    heading = true
+    break = true
+[init]
+    templatedir = ~/.git_template
