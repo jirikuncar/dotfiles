@@ -13,3 +13,6 @@
 [submodule "vim/vim.symlink/bundle/tagbar"]
 	path = vim/vim.symlink/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar
+[submodule "vim/vim.symlink/bundle/tasklist"]
+	path = vim/vim.symlink/bundle/tasklist
+	url = git://github.com/vim-scripts/TaskList.vim.git
