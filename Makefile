@@ -21,7 +21,7 @@ install: install-vim install-bash install-virtualenvwrapper \
 
 git-submodule:
 	@git submodule init
-	@git submodule sync
+	@git submodule update
 
 install-vim: git-submodule .vim .vimrc
 	@echo "Vim config installed"

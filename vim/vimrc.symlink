@@ -13,7 +13,7 @@ call pathogen#helptags()
 
 " ================ General Config ====================
 
-let mapleader = ","
+let mapleader=","
 set number                      "Line numbers are good
 set cursorline                  "Line to indicate the cursor location
 set backspace=indent,eol,start  "Allow backspace in insert mode
@@ -94,6 +94,8 @@ nnoremap <leader>Th :set ft=htmljinja<CR>
 nnoremap <leader>Tp :set ft=python<CR>
 nnoremap <leader>Tj :set ft=javascript<CR>
 nnoremap <leader>Tr :set ft=rst<CR>
+
+colorscheme molokai
 
 " ================ Search Settings  =================
 
@@ -223,7 +225,7 @@ autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 s
 autocmd FileType python set breakat=\ ^I!@*-+;:,./?\(\[\{
 
 " Execute file being edited with <Shift> + e:
-autocmd FileType python map <buffer> <S-e> :w<CR>:py % <CR>
+autocmd FileType python map <buffer> <S-e> :w!<CR>:py % <CR>
 
 " ruby support
 " ------------
