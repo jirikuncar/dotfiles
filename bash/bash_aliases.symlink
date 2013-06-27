@@ -100,6 +100,7 @@ alias gl='git log'
 alias glp='git log -p'
 alias gls='git log --stat'
 alias gll="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias glw='git log --author="`git config --get user.name`" --format="- %B" --since=-7days --reverse | grep -v "^$" | grep "^[-* ]" | sed "s/^\([^-]\)/  \1/"'
 
 # Hack to fix issues with autocompletion using aliases
 __define_git_completion () {
@@ -146,20 +147,24 @@ __git_shortcut  gg    grep --color -n
 __git_shortcut  ggi   grep --color --break --heading --line-number
 __git_shortcut  gsa   submodule add
 
-
 # Only OSX stuff
 if [ "$(uname)" == "Darwin" ]; then
     # Recursively delete `.DS_Store` files
     alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
     # Aliases for gnu utilies installed with brew
-    if type -p gfind > /dev/null; then
-        alias find='gfind'
-    fi
-    if type -p glocate > /dev/null; then
-        alias locate='glocate'
-    fi
-    if type -p gxargs > /dev/null; then
-        alias xargs='gxargs'
-    fi
+    # printf
+    for command in base64 basename cat chcon chgrp chmod chown chroot cksum comm \
+        cp csplit cut date dd df dir dircolors dirname du echo env expand expr factor \
+        false fmt fold groups head hostid id install join kill link ln logname ls \
+        md5sum mkdir mkfifo mknod mktemp mv nice nl nohup od paste pathchk pinky pr \
+        printenv ptx pwd readlink rm rmdir runcon seq sha1sum sha224sum \
+        sha256sum sha384sum sha512sum shred shuf sleep sort split stat stty sum sync \
+        tac tail tee test touch tr true tsort tty uname unexpand uniq unlink uptime \
+        users vdir wc who whoami yes "["; do
+        # Check if it's proper programm
+	if type -p /usr/local/bin/g$command > /dev/null; then
+            alias $command="/usr/local/bin/g$command"
+        fi
+    done
 fi
