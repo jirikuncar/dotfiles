@@ -1,19 +1,28 @@
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    grep = auto
+	diff = auto
+	status = auto
+	branch = auto
+	grep = auto
+	ui = auto
 [user]
-    email = egabancho@gmail.com
-    name = Esteban J. G. Gabancho
+	email = jiri.kuncar@gmail.com
+	name = Jiri Kuncar
 [core]
-    editor = vim
-    excludesfile = ~/.gitignore_global
+	editor = vim
+	excludesfile = ~/.gitignore_global
 [grep]
-    match = normal
-    extendRegexp = true
-    lineNumber = true
-    heading = true
-    break = true
+	match = normal
+	extendRegexp = true
+	lineNumber = true
+	heading = true
+	break = true
 [init]
-    templatedir = ~/.git_template
+	templatedir = ~/.git_template
+[sendemail]
+	smtpserver = smtp.gmail.com
+	smtpuser = jiri.kuncar@gmail.com
+	smtpencryption = tls
+	smtpserverport = 587
+	confirm = auto
+[credential]
+	helper = osxkeychain
