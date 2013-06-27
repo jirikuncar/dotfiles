@@ -1,4 +1,5 @@
 bash/bash_misc.symlink/*
 vim/vim.symlink/backups
+vim/vim.symlink/sessions
 vim/vim.symlink/.netrwhist
 !.gitignore
