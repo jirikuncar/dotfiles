@@ -7,16 +7,16 @@ fi
 source $DOTFILES/bash/prompt-colors.bash
 source $DOTFILES/bash/prompt-functions.bash
 
-SCM_THEME_PROMPT_DIRTY=" ${red}✗"
-SCM_THEME_PROMPT_CLEAN=" ${yellow}✓"
-SCM_THEME_PROMPT_PREFIX=" ${green}| ${bold_cyan}"
-SCM_THEME_PROMPT_SUFFIX="${green} |"
+SCM_THEME_PROMPT_DIRTY="${red}✗"
+SCM_THEME_PROMPT_CLEAN="${yellow}✓"
+SCM_THEME_PROMPT_PREFIX="${green}|${bold_cyan}"
+SCM_THEME_PROMPT_SUFFIX="${green}|"
 
-VIRTUALENV_THEME_PROMPT_PREFIX=" ${green}(${bold_white}"
-VIRTUALENV_THEME_PROMPT_SUFFIX="${green})"
+VIRTUALENV_THEME_PROMPT_PREFIX="${orange}(${bold_white}"
+VIRTUALENV_THEME_PROMPT_SUFFIX="${orange})${reset_color}"
 
 function prompt_command() {
-    PS1="${purple}\u@\h $(virtualenv_prompt) ${reset_color}in ${green}\w${purple} ${bold_cyan}$(scm_prompt_vars) ${yellow}➜${reset_color}  "
+    PS1="$(virtualenv_prompt)${green}\u@\h${reset_color}:${blue}\w${reset_color}${bold_cyan}$(scm_prompt_vars)${reset_color}$ "
 }
 
 PROMPT_COMMAND=prompt_command;
