@@ -43,3 +43,6 @@
 [submodule "vim/vim.symlink/bundle/extline"]
 	path = vim/vim.symlink/bundle/extline
 	url = https://github.com/drmikehenry/vim-extline.git
+[submodule "vim/vim.symlink/bundle/virtualenv"]
+	path = vim/vim.symlink/bundle/virtualenv
+	url = https://github.com/jmcantrell/vim-virtualenv.git

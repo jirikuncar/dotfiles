@@ -44,6 +44,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
+
 " Set region to US English
 set spelllang=en_us
 
@@ -52,6 +53,9 @@ set shellcmdflag=-ic
 
 "change the current dir to file path unless working on /tmp
 autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
+
+" Change white chars
+set listchars=tab:\|\ ,trail:~,extends:>,precedes:<  
 
 "Force Saving Files that Require Root Permission
 cmap w!! %!sudo tee > /dev/null %
@@ -189,18 +193,18 @@ set sidescroll=1
 " ================ Virtualenv ========================
 
 " Add the virtualenv's site-packages to vim path
-" if has('python')
-" py << EOF
-" import os.path
-" import sys
-" import vim
-" if 'VIRTUAL_ENV' in os.environ:
-"     project_base_dir = os.environ['VIRTUAL_ENV']
-"     sys.path.insert(0, project_base_dir)
-"     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"     execfile(activate_this, dict(__file__=activate_this))
-" EOF
-" endif
+if has('python')
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+endif
 
 " Load up virtualenv's vimrc if it exists
 if filereadable($VIRTUAL_ENV . '/.vimrc')
@@ -208,24 +212,6 @@ if filereadable($VIRTUAL_ENV . '/.vimrc')
 endif
 
 " =================== FileTypes ======================
-
-" python support
-" --------------
-"  don't highlight exceptions and builtins. I love to override them in local
-"  scopes and it sucks ass if it's highlighted then. And for exceptions I
-"  don't really want to have different colors for my own exceptions ;-)
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
-\ formatoptions+=croq softtabstop=4 smartindent
-\ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-let python_highlight_all=1
-let python_highlight_exceptions=0
-let python_highlight_builtins=0
-autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-
-autocmd FileType python set breakat=\ ^I!@*-+;:,./?\(\[\{
-
-" Execute file being edited with <Shift> + e:
-autocmd FileType python map <buffer> <S-e> :w!<CR>:py % <CR>
 
 " ruby support
 " ------------
@@ -340,3 +326,72 @@ autocmd FileType d setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
 " -------------
 autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
 
+" ----------------------------------------------"
+" MacVim modifications (color, shortcuts, etc.. "
+" ----------------------------------------------"
+"http://stackoverflow.com/questions/14802689/macvim-wont-load-specific-color-scheme-by-default
+let macvim_skip_colorscheme=1
+let g:molokai_original=1
+colorscheme molokai
+highlight SignColumn guibg=#272822   
+
+if has("gui_macvim")
+  " No toolbars, menu or scrollbars in the GUI
+  " set guifont=Source\ Code\ Pro\ for\ Powerline:h13 "TODO: include these fonts by default
+  set clipboard+=unnamed
+  set vb t_vb=
+  set guioptions-=m  "no menu
+  set guioptions-=T  "no toolbar
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r  "no scrollbar
+  set guioptions-=R
+
+  " Comment lines with cmd+/
+  map <D-/> :TComment<cr>
+  vmap <D-/> :TComment<cr>gv
+
+  " Indent lines with cmd+[ and cmd+]
+  " nmap <D-]> >>
+  " nmap <D-[> <<
+  " vmap <D-[> <gv
+  " vmap <D-]> >gv
+
+  "Open sidebar with cmd+k
+  map <D-k> :NERDTreeTabsToggle<CR>
+
+  " This mapping makes Ctrl-Tab switch between tabs. 
+  " Ctrl-Shift-Tab goes the other way.
+  noremap <C-Tab> :tabnext<CR>
+  noremap <C-S-Tab> :tabprev<CR>
+
+  " switch between tabs with cmd+1, cmd+2,..."
+  map <D-1> 1gt
+  map <D-2> 2gt
+  map <D-3> 3gt
+  map <D-4> 4gt
+  map <D-5> 5gt
+  map <D-6> 6gt
+  map <D-7> 7gt
+  map <D-8> 8gt
+  map <D-9> 9gt
+
+  " until we have default MacVim shortcuts this is the only way to use it in
+  " insert mode
+  imap <D-1> <esc>1gt
+  imap <D-2> <esc>2gt
+  imap <D-3> <esc>3gt
+  imap <D-4> <esc>4gt
+  imap <D-5> <esc>5gt
+  imap <D-6> <esc>6gt
+  imap <D-7> <esc>7gt
+  imap <D-8> <esc>8gt
+  imap <D-9> <esc>9gt
+
+  " Select text whit shift
+  let macvim_hig_shift_movement = 1
+
+  " Stop completion with enter, in addition to default ctrl+y
+  imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+
+endif
