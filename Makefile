@@ -2,19 +2,19 @@ install: install-vim install-bash install-virtualenvwrapper \
          install-terminal-settings install-git
 
 .%: vim/%.symlink
-	@rm ~/$@ 2>/dev/null
+	@rm ~/$@ 2>/dev/null || echo 'not exists'
 	ln -s `pwd`/$< ~/$@
 
 .%: bash/%.symlink
-	@rm ~/$@ 2>/dev/null
+	@rm ~/$@ 2>/dev/null || echo 'not exists'
 	ln -s `pwd`/$< ~/$@
 
 .%: git/%.symlink
-	@rm ~/$@ 2>/dev/null
+	@rm ~/$@ 2>/dev/null || echo 'not exists'
 	ln -s `pwd`/$< ~/$@
 
 .gitconfig: git/gitconfig.symlink
-	@rm ~/$@ 2>/dev/null
+	@rm ~/$@ 2>/dev/null || echo 'not exists'
 	cp `pwd`/$< ~/$@
 	@git config --global sendemail.smtppass "$(shell read -s -p "Password: " REPLY; echo "$$REPLY")"
 	chmod 600 ~/.gitconfig
@@ -22,8 +22,11 @@ install: install-vim install-bash install-virtualenvwrapper \
 git-submodule:
 	@git submodule init
 	@git submodule update
+	@git submodule foreach git submodule init
+	@git submodule foreach git submodule update
 
-install-vim: git-submodule .vim .vimrc
+install-vim: git-submodule .vim .vimrc .gvimrc
+	sudo pip install ropevim && ln -s $(python-config --prefix)/share/vim/plugin/ropevim.vim ~/.vim/plugin/ropevim.vim
 	@echo "Vim config installed"
 
 install-bash: .bash_aliases .bash_export .bash_functions .bash_profile .bash_prompt .bashrc .inputrc
