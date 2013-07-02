@@ -167,4 +167,7 @@ if [ "$(uname)" == "Darwin" ]; then
             alias $command="/usr/local/bin/g$command"
         fi
     done
+
+    alias mvim="open -a MacVim.app"
+    alias aclocal="aclocal $ACLOCAL_FLAGS"
 fi

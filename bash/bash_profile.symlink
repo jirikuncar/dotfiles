@@ -14,6 +14,8 @@ if which brew >/dev/null 2>&1; then
   fi
   if [ -f $(brew --prefix)/share/python/virtualenvwrapper.sh ]; then
     . $(brew --prefix)/share/python/virtualenvwrapper.sh
+  elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    . /usr/local/bin/virtualenvwrapper.sh
   fi
 else
   if [ -f $HOME/.dotfiles/bash/git_completion.bash ]; then
@@ -31,3 +33,6 @@ shopt -s histappend
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# Disable CTRL-S
+stty -ixon -ixoff
