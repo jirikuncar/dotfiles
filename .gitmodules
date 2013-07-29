@@ -34,3 +34,6 @@
 [submodule "vim/vim.symlink/bundle/delimitMate"]
 	path = vim/vim.symlink/bundle/delimitMate
 	url = git://github.com/Raimondi/delimitMate.git
+[submodule "vim/vim.symlink/bundle/jedi"]
+	path = vim/vim.symlink/bundle/jedi
+	url = https://github.com/davidhalter/jedi-vim.git
