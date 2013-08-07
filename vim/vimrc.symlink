@@ -57,6 +57,8 @@ cmap w!! %!sudo tee > /dev/null %
 " http://vim.wikia.com/wiki/Browsing_programs_with_tags
 set tags=./tags;
 
+colorscheme molokai
+
 " ================ Search Settings  =================
 
 set incsearch        "Find the next match as we type the search
