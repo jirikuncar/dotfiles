@@ -26,7 +26,7 @@ git-submodule:
 	@git submodule foreach git submodule update
 
 install-vim: git-submodule .vim .vimrc .gvimrc
-	sudo pip install ropevim && ln -s /usr/local/share/vim/plugin/ropevim.vim ~/.vim/plugin/ropevim.vim
+	#sudo pip install ropevim && ln -s /usr/local/share/vim/plugin/ropevim.vim ~/.vim/plugin/ropevim.vim
 	@echo "Vim config installed"
 
 install-bash: .bash_aliases .bash_export .bash_functions .bash_profile .bash_prompt .bashrc .inputrc

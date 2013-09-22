@@ -46,3 +46,9 @@
 [submodule "vim/vim.symlink/bundle/virtualenv"]
 	path = vim/vim.symlink/bundle/virtualenv
 	url = https://github.com/jmcantrell/vim-virtualenv.git
+[submodule "vim/vim.symlink/bundle/jedi"]
+	path = vim/vim.symlink/bundle/jedi
+	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "vim/vim.symlink/bundle/syntastic"]
+	path = vim/vim.symlink/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git

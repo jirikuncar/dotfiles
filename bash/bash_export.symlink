@@ -4,11 +4,8 @@ export DOTFILES=$HOME/.dotfiles
 # Make vim the default editor
 export EDITOR="vim"
 
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
-
-if which brew >/dev/null 2>&1; then
-    export ACLOCAL_FLAGS="-I `brew --prefix gettext`/share/aclocal/ $ACLOCAL_FLAGS"
-fi
+#export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/share/python:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Include user's bin folder.
 if [ -d "$HOME/bin" ] ; then

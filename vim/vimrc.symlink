@@ -3,6 +3,9 @@
 set nocompatible
 set encoding=utf-8
 
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
 " =============== Pathogen Initialization ===============
 " This loads all the plugins in ~/.vim/bundle
 " Use tpope's pathogen plugin to manage all other plugins
@@ -27,6 +30,7 @@ set showmode                    "Show current mode down the bottom
 set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
+set bs=2                        "Make backspace behave like normal again
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -43,7 +47,10 @@ autocmd BufEnter * :syntax sync fromstart
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " Toggle spell checking on and off with `,s`
-nmap <silent> <leader>s :set spell!<CR>
+nmap <silent> <leader>l :set spell!<CR>
+
+" Sort selected lines
+vnoremap <Leader>s :sort<CR>
 
 " Set region to US English
 set spelllang=en_us
@@ -90,8 +97,6 @@ set gdefault
 nnoremap <tab> %
 vnoremap <tab> %
 
-" Remove trailing whitespace on <leader>S
-nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Easy switching
 nnoremap <leader>Th :set ft=htmljinja<CR>
@@ -99,7 +104,39 @@ nnoremap <leader>Tp :set ft=python<CR>
 nnoremap <leader>Tj :set ft=javascript<CR>
 nnoremap <leader>Tr :set ft=rst<CR>
 
+" =============== Whitespace control ================
+" Remove trailing whitespace on <leader>S
+nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
+
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".") " save cursor line
+    let c = col(".")  " save cursor column
+    %s/\s\+$//e       " remove trailing whitespaces
+    call cursor(l, c) " restore cursor position
+endfun
+
+autocmd FileType c,cpp,java,php,ruby,python autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
 colorscheme molokai
+
+" =============== Quicksave command =================
+
+noremap <D-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+
+" ================== Code blocks ====================
+
+vnoremap < <gv
+vnoremap > >gv
+
+vmap Q gq
+nmap Q gqap
 
 " ================ Search Settings  =================
 
@@ -115,9 +152,12 @@ nnoremap <leader><space> :nohlsearch<cr>
 " =================== Swap Files ====================
 " Move Backup Files to ~/.vim/sessions
 
-silent !mkdir ~/.vim/sessions > /dev/null 2>&1
-set backupdir=~/.vim/sessions
-set dir=~/.vim/sessions
+" silent !mkdir ~/.vim/sessions > /dev/null 2>&1
+" set backupdir=~/.vim/sessions
+" set dir=~/.vim/sessions
+
+" Don't use swapfiles
+set noswapfile
 
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.

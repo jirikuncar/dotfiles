@@ -169,5 +169,4 @@ if [ "$(uname)" == "Darwin" ]; then
     done
 
     alias mvim="open -a MacVim.app"
-    alias aclocal="aclocal $ACLOCAL_FLAGS"
 fi

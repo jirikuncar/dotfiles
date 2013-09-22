@@ -1,0 +1,1 @@
+/Users/jirka/programing/dotfiles/vim/scripts/closetag.vim
