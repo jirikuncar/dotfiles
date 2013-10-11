@@ -1,5 +1,10 @@
-for file in $HOME/.{bash_extra,bash_export,bash_prompt,bash_aliases,bash_functions}; do
+for file in $HOME/.{bash_export,bash_prompt,bash_aliases,bash_functions}; do
     [ -r "$file" ] && source "$file"
+done
+
+misc_files=$HOME/.bash_misc/*
+for file in $misc_files ; do
+    . $file
 done
 
 #Avoid loops when loading bash_completion from brew

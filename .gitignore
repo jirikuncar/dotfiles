@@ -1,4 +1,4 @@
+bash/bash_misc.symlink/*
 vim/vim.symlink/backups
 vim/vim.symlink/.netrwhist
-vim/vim.symlink/bundle/snipmate/doc/tags
-vim/vim.symlink/bundle/tComment/doc/tags
+!.gitignore

@@ -23,6 +23,10 @@ else
     export WORKON_HOME=$HOME/.virtualenvs
 fi
 
+if [ -d "$HOME/lib/python" ] ; then
+    export PYTHONPATH=:$PYTHONPATH:$HOME/lib/python
+fi
+
 #osx color terminal
 export CLICOLOR=1
 
